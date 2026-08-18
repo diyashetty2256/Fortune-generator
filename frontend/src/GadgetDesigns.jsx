@@ -37,7 +37,7 @@ const InfoRow = ({ label, value, labelColor = '#92400e', valueColor = '#1c1917',
 const DarkPanel = ({ children }) => (
   <div style={{
     backgroundColor: '#fdf6f0', width: '100%', borderRadius: '16px',
-    padding: '3rem 1rem 3rem 1rem', display: 'flex', justifyContent: 'center',
+    padding: 'clamp(5rem, 15vw, 6.5rem) 1rem 3rem 1rem', display: 'flex', justifyContent: 'center',
     alignItems: 'center', boxSizing: 'border-box'
   }}>
     {children}
