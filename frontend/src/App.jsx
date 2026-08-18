@@ -9,16 +9,61 @@ function App() {
   const [fortune, setFortune] = useState(null);
 
   const fortunes = [
-    "A story waiting to be written will soon find you.",
-    "Your next great idea is closer than you think.",
-    "A character is waiting to meet you.",
-    "Somewhere between the pages, your fortune is waiting.",
-    "A story worth remembering is about to begin."
+    {
+      id: 1,
+      design: 'etch-a-jam',
+      quote: "Somewhere between the pages, your fortune is waiting at....",
+      date: "22 August 2026",
+      time: "9:00 am - 12 pm",
+      venue: "NC 13"
+    },
+    {
+      id: 2,
+      design: 'tamagotchi',
+      quote: "A character is waiting to meet you at....",
+      date: "22 August 2026",
+      time: "9:00 am - 12:00 pm",
+      venue: "NC 13"
+    },
+    {
+      id: 3,
+      design: 'gameboy',
+      quote: "Your next great idea is closer than you think at....",
+      date: "22 August 2026",
+      time: "9:00 am - 12:00 pm",
+      venue: "NC 13"
+    },
+    {
+      id: 4,
+      design: 'walkman',
+      quote: "Listen to the stories waiting to be told at....",
+      date: "22 August 2026",
+      time: "9:00 am - 12:00 pm",
+      venue: "NC 13"
+    },
+    {
+      id: 5,
+      design: 'polaroid',
+      quote: "Picture yourself in a world of words at....",
+      date: "22 August 2026",
+      time: "9:00 am - 12:00 pm",
+      venue: "NC 13"
+    },
+    {
+      id: 6,
+      design: 'typewriter',
+      quote: "A story worth remembering is about to begin at....",
+      date: "22 August 2026",
+      time: "9:00 am - 12:00 pm",
+      venue: "NC 13"
+    }
   ];
 
   const handleSelectCookie = (cookieId) => {
     setSelectedCookie(cookieId);
-    setFortune(fortunes[Math.floor(Math.random() * fortunes.length)]);
+    // Pick randomly from the 6 fortunes on every cookie click
+    const randomFortune = fortunes[Math.floor(Math.random() * fortunes.length)];
+    setFortune(randomFortune);
     setCurrentScreen('opening');
   };
 
@@ -26,8 +71,14 @@ function App() {
     setCurrentScreen('reveal');
   };
 
+  const handleReset = () => {
+    setSelectedCookie(null);
+    setFortune(null);
+    setCurrentScreen('selection');
+  };
+
   return (
-    <div className="app-container" style={{ minHeight: '100vh', display: 'flex', flexDirection: 'column' }}>
+    <div className="app-container" style={{ minHeight: '100vh', display: 'flex', flexDirection: 'column', backgroundColor: '#fdf6f0' }}>
       {currentScreen === 'selection' && (
         <FortuneSelection onSelect={handleSelectCookie} />
       )}
@@ -35,7 +86,7 @@ function App() {
         <CookieOpening fortune={fortune} onContinue={handleContinue} />
       )}
       {currentScreen === 'reveal' && (
-        <EventReveal />
+        <EventReveal fortune={fortune} onReset={handleReset} />
       )}
     </div>
   );

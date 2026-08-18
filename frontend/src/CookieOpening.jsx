@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { motion, useAnimation } from 'framer-motion';
+import { motion } from 'framer-motion';
 
 const CookieOpening = ({ fortune, onContinue }) => {
   const [stage, setStage] = useState('idle'); // idle -> shaking -> cracked -> split -> paper_emerging -> revealed
@@ -7,13 +7,13 @@ const CookieOpening = ({ fortune, onContinue }) => {
   useEffect(() => {
     const sequence = async () => {
       // Step 1: Wait a moment before starting
-      await new Promise(r => setTimeout(r, 500));
-      
+      await new Promise(r => setTimeout(r, 400));
+
       // Step 2: Shake
       setStage('shaking');
-      await new Promise(r => setTimeout(r, 800));
+      await new Promise(r => setTimeout(r, 700));
 
-      // Step 3: Crack (swap image to halves but close together)
+      // Step 3: Crack
       setStage('cracked');
       await new Promise(r => setTimeout(r, 300));
 
@@ -21,68 +21,75 @@ const CookieOpening = ({ fortune, onContinue }) => {
       setStage('split');
       await new Promise(r => setTimeout(r, 400));
 
-      // Step 5 & 6 & 7: Paper emerges and unfolds
+      // Step 5: Paper emerges
       setStage('paper_emerging');
-      await new Promise(r => setTimeout(r, 800));
+      await new Promise(r => setTimeout(r, 700));
 
-      // Step 8: Reveal text
+      // Step 6: Revealed
       setStage('revealed');
     };
 
     sequence();
   }, []);
 
+  const quoteText = fortune?.quote || "Somewhere between the pages, your fortune is waiting at....";
+
   return (
-    <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', minHeight: '100vh', position: 'relative', overflow: 'hidden' }}>
-      
-      <div style={{ position: 'relative', width: '300px', height: '300px', display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
-        
+    <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', minHeight: '100vh', position: 'relative', overflow: 'hidden', padding: '2rem' }}>
+
+      <div style={{ position: 'relative', width: '320px', height: '320px', display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
+
         {/* Closed Cookie */}
         {(stage === 'idle' || stage === 'shaking') && (
           <motion.img
             src="/cookie-closed.png"
             alt="Closed Cookie"
             animate={stage === 'shaking' ? {
-              x: [-5, 5, -5, 5, 0],
-              rotate: [-2, 2, -2, 2, 0],
+              x: [-8, 8, -8, 8, 0],
+              rotate: [-4, 4, -4, 4, 0],
             } : {}}
             transition={{ duration: 0.4, repeat: 2 }}
-            style={{ position: 'absolute', width: '200px', zIndex: 10 }}
+            style={{ position: 'absolute', width: '220px', zIndex: 10, filter: 'drop-shadow(0 15px 25px rgba(0,0,0,0.6))' }}
           />
         )}
 
-        {/* Fortune Paper */}
+        {/* Fortune Paper Emerging */}
         {(stage === 'split' || stage === 'paper_emerging' || stage === 'revealed') && (
           <motion.div
-            initial={{ opacity: 0, scaleY: 0, y: 50, scaleX: 0.5 }}
+            initial={{ opacity: 0, scaleY: 0, y: 40, scaleX: 0.6 }}
             animate={
-              stage === 'paper_emerging' || stage === 'revealed' ? { opacity: 1, scaleY: 1, scaleX: 1, y: -80 } : {}
+              stage === 'paper_emerging' || stage === 'revealed' ? { opacity: 1, scaleY: 1, scaleX: 1, y: -90 } : {}
             }
-            transition={{ duration: 0.8, type: 'spring', bounce: 0.3 }}
+            transition={{ duration: 0.7, type: 'spring', bounce: 0.3 }}
             style={{
               position: 'absolute',
               zIndex: 5,
-              background: '#fff',
-              padding: '20px 40px',
-              border: '1px solid var(--color-outline)',
-              boxShadow: 'var(--shadow-soft)',
+              background: '#fef3c7',
+              backgroundImage: 'linear-gradient(135deg, #fffbeb 0%, #fef3c7 100%)',
+              padding: '24px 32px',
+              borderRadius: '12px',
+              border: '2px solid #fde047',
+              boxShadow: '0 15px 35px rgba(0,0,0,0.5)',
               display: 'flex',
+              flexDirection: 'column',
               alignItems: 'center',
               justifyContent: 'center',
-              minWidth: '280px',
-              minHeight: '80px',
+              minWidth: '300px',
+              maxWidth: '360px',
               transformOrigin: 'bottom center',
-              backgroundImage: 'url("data:image/svg+xml,%3Csvg width=\'100%25\' height=\'100%25\' xmlns=\'http://www.w3.org/2000/svg\'%3E%3Cfilter id=\'noise\'%3E%3CfeTurbulence type=\'fractalNoise\' baseFrequency=\'0.8\' numOctaves=\'3\' stitchTiles=\'stitch\'/%3E%3C/filter%3E%3Crect width=\'100%25\' height=\'100%25\' filter=\'url(%23noise)\' opacity=\'0.05\'/%3E%3C/svg%3E")',
             }}
           >
+            <span style={{ fontSize: '0.8rem', fontWeight: 700, color: '#b45309', textTransform: 'uppercase', letterSpacing: '0.1em', marginBottom: '6px' }}>
+              ✨ FORTUNE UNLOCKED
+            </span>
             <motion.p
               initial={{ opacity: 0 }}
               animate={stage === 'revealed' ? { opacity: 1 } : { opacity: 0 }}
-              transition={{ duration: 0.5, delay: 0.3 }}
-              className="headline-lg"
-              style={{ fontSize: '1.25rem', textAlign: 'center', color: 'var(--color-primary)' }}
+              transition={{ duration: 0.4, delay: 0.2 }}
+              className="font-kalam"
+              style={{ fontSize: '1.25rem', textAlign: 'center', color: '#78350f', margin: 0, lineHeight: 1.4 }}
             >
-              {fortune}
+              "{quoteText}"
             </motion.p>
           </motion.div>
         )}
@@ -95,11 +102,11 @@ const CookieOpening = ({ fortune, onContinue }) => {
             initial={{ x: 20, rotate: 0 }}
             animate={
               stage === 'split' || stage === 'paper_emerging' || stage === 'revealed'
-                ? { x: -60, rotate: -15 }
+                ? { x: -80, rotate: -20, y: 20 }
                 : {}
             }
             transition={{ type: 'spring', stiffness: 100 }}
-            style={{ position: 'absolute', width: '100px', zIndex: 10 }}
+            style={{ position: 'absolute', width: '110px', zIndex: 10, filter: 'drop-shadow(0 10px 20px rgba(0,0,0,0.5))' }}
           />
         )}
 
@@ -111,11 +118,11 @@ const CookieOpening = ({ fortune, onContinue }) => {
             initial={{ x: -20, rotate: 0 }}
             animate={
               stage === 'split' || stage === 'paper_emerging' || stage === 'revealed'
-                ? { x: 60, rotate: 15 }
+                ? { x: 80, rotate: 20, y: 20 }
                 : {}
             }
             transition={{ type: 'spring', stiffness: 100 }}
-            style={{ position: 'absolute', width: '100px', zIndex: 10 }}
+            style={{ position: 'absolute', width: '110px', zIndex: 10, filter: 'drop-shadow(0 10px 20px rgba(0,0,0,0.5))' }}
           />
         )}
 
@@ -124,11 +131,11 @@ const CookieOpening = ({ fortune, onContinue }) => {
       <motion.div
         initial={{ opacity: 0, y: 20 }}
         animate={stage === 'revealed' ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
-        transition={{ duration: 0.5, delay: 1 }}
-        style={{ marginTop: '2rem' }}
+        transition={{ duration: 0.5, delay: 0.5 }}
+        style={{ marginTop: '2.5rem' }}
       >
         <button className="btn-primary" onClick={onContinue}>
-          CONTINUE →
+          REVEAL YOUR INVITATION 🎉
         </button>
       </motion.div>
 
