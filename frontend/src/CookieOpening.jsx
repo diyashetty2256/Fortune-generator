@@ -74,8 +74,9 @@ const CookieOpening = ({ fortune, onContinue }) => {
               flexDirection: 'column',
               alignItems: 'center',
               justifyContent: 'center',
-              minWidth: '300px',
-              maxWidth: '360px',
+              minWidth: '260px',
+              maxWidth: '90%',
+              width: 'max-content',
               transformOrigin: 'bottom center',
             }}
           >

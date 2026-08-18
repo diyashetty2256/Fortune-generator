@@ -28,7 +28,7 @@ const FortuneSelection = ({ onSelect }) => {
           Choose a cookie to reveal your fortune
         </div>
 
-        <h1 className="font-rounded" style={{ fontSize: '2.5rem', color: '#28180d', marginBottom: '0.75rem', fontWeight: 800 }}>
+        <h1 className="font-rounded" style={{ fontSize: 'clamp(1.8rem, 6vw, 2.5rem)', color: '#28180d', marginBottom: '0.75rem', fontWeight: 800 }}>
           YOUR FORTUNE AWAITS.......
         </h1>
 
@@ -38,14 +38,13 @@ const FortuneSelection = ({ onSelect }) => {
       <div style={{
         display: 'flex',
         flexDirection: 'row',
-        flexWrap: 'nowrap',
+        flexWrap: 'wrap',
         gap: '1.5rem',
         justifyContent: 'center',
         alignItems: 'center',
         width: '100%',
         maxWidth: '900px',
         marginBottom: '3rem',
-        overflowX: 'auto',
         paddingBottom: '0.5rem'
       }}>
         {cookies.map((id) => (

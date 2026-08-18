@@ -37,8 +37,8 @@ const InfoRow = ({ label, value, labelColor = '#92400e', valueColor = '#1c1917',
 const DarkPanel = ({ children }) => (
   <div style={{
     backgroundColor: '#fdf6f0', width: '100%', borderRadius: '16px',
-    padding: '5rem 2rem 3rem 2rem', display: 'flex', justifyContent: 'center',
-    alignItems: 'center'
+    padding: '3rem 1rem 3rem 1rem', display: 'flex', justifyContent: 'center',
+    alignItems: 'center', boxSizing: 'border-box'
   }}>
     {children}
   </div>
@@ -60,7 +60,7 @@ export const EtchAJamDesign = ({ fortuneData }) => {
       <HeaderBanner quote="Somewhere between the pages, your fortune is waiting at…" />
       <DarkPanel>
         <motion.div {...cardEntrance} style={{
-          width: '380px',
+          width: '100%', maxWidth: '380px', boxSizing: 'border-box',
           background: 'linear-gradient(160deg, #fffbf5 0%, #fdf6ec 100%)',
           borderRadius: '16px',
           padding: '0',
@@ -120,7 +120,7 @@ export const TamagotchiDesign = ({ fortuneData }) => {
       <HeaderBanner quote="A character is waiting to meet you at…" />
       <DarkPanel>
         <motion.div {...cardEntrance} style={{
-          width: '380px',
+          width: '100%', maxWidth: '380px', boxSizing: 'border-box',
           background: '#ffffff',
           borderRadius: '4px',
           boxShadow: '0 20px 50px rgba(0,0,0,0.45)',
@@ -170,7 +170,7 @@ export const GameBoyDesign = ({ fortuneData }) => {
       <HeaderBanner quote="Your next great idea is waiting for you at…" />
       <DarkPanel>
         <motion.div {...cardEntrance} style={{
-          width: '380px',
+          width: '100%', maxWidth: '380px', boxSizing: 'border-box',
           background: 'linear-gradient(145deg, #1a1209 0%, #2d1f0a 100%)',
           borderRadius: '12px',
           padding: '4px',
@@ -231,7 +231,7 @@ export const WalkmanDesign = ({ fortuneData }) => {
       <HeaderBanner quote="Stories worth telling are waiting for you at…" />
       <DarkPanel>
         <motion.div {...cardEntrance} style={{
-          width: '380px',
+          width: '100%', maxWidth: '380px', boxSizing: 'border-box',
           background: 'linear-gradient(135deg, #440d50ff 0%, #4b0404ff 50%, #07162bff 100%)',
           borderRadius: '20px',
           padding: '36px 36px 32px',
@@ -246,7 +246,7 @@ export const WalkmanDesign = ({ fortuneData }) => {
 
           <div style={{ position: 'relative' }}>
             <div style={{ display: 'flex', justifyContent: 'center', gap: '6px', marginBottom: '10px', fontSize: '1.3rem' }}>
-              📖 
+              📖
             </div>
 
             <div style={{ textAlign: 'center', marginBottom: '22px' }}>
@@ -263,7 +263,7 @@ export const WalkmanDesign = ({ fortuneData }) => {
 
             <div style={{ textAlign: 'center', marginTop: '18px' }}>
               <span className="font-kalam" style={{ color: '#be185d', fontSize: '1.15rem', fontStyle: 'italic' }}>
-                — Authorcraft awaits you 
+                — Authorcraft awaits you
               </span>
             </div>
           </div>
@@ -283,7 +283,7 @@ export const PolaroidDesign = ({ fortuneData }) => {
       <HeaderBanner quote="Picture yourself in a world of words at…" />
       <DarkPanel>
         <motion.div {...cardEntrance} style={{
-          width: '380px',
+          width: '100%', maxWidth: '380px', boxSizing: 'border-box',
           background: 'linear-gradient(160deg, #f0fdf4 0%, #dcfce7 60%, #f0fdf4 100%)',
           borderRadius: '16px',
           padding: '0',
@@ -347,7 +347,7 @@ export const TypewriterDesign = ({ fortuneData }) => {
       <HeaderBanner quote="A story worth remembering is about to begin at…" />
       <DarkPanel>
         <motion.div {...cardEntrance} style={{
-          width: '380px',
+          width: '100%', maxWidth: '380px', boxSizing: 'border-box',
           background: 'linear-gradient(160deg, #fffbf5 0%, #fef9f0 100%)',
           borderRadius: '12px',
           boxShadow: '0 20px 50px rgba(0,0,0,0.4)',
